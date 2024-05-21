@@ -20,6 +20,16 @@ pipeline {
                 sh ' terraform init'
             }
         }
+        stage('Terraform Format') {
+            steps {
+                sh ' terraform fmt'
+            }
+        }
+        stage('Terraform Validate') {
+            steps {
+                sh ' terraform validate'
+            }
+        }
         stage('cd git-cicd &&  Terraform Plan') {
             steps {
                 sh 'terraform plan '
@@ -30,10 +40,10 @@ pipeline {
                 sh 'terraform apply -auto-approve'
             }
         }
-        // stage('Terraform destroy') {
-        //     steps {
-        //         sh 'terraform destroy -auto-approve'
-        //     }
-        // }
+          stage('Terraform destroy') {
+              steps {
+                  sh 'terraform destroy -auto-approve'
+              }
+            }
     }
 }
