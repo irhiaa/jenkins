@@ -20,6 +20,16 @@ pipeline {
                 sh ' terraform init'
             }
         }
+        stage('Terraform Format') {
+            steps {
+                sh ' terraform fmt'
+            }
+        }
+        stage('Terraform Validate') {
+            steps {
+                sh ' terraform validate'
+            }
+        }
         stage('cd git-cicd &&  Terraform Plan') {
             steps {
                 sh 'terraform plan '
